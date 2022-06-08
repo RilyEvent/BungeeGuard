@@ -14,9 +14,14 @@ jobs:
           java-version: '18'
           distribution: 'adopt'
           cache: maven
+      - name: Install bungeecord as local dependency
+        run: |
+          git clone https://github.com/SpigotMC/BungeeCord.git
+          cd BungeeCord/
+          mvn install
       - name: Run the Maven verify phase
         run: mvn --batch-mode --update-snapshots verify
-      - name: Install as local dependencies
+      - name: Install all packages as local dependencies
         run: mvn --batch-mode --install
       - name: Build bungeeguard-universal
         run: cd bungeeguard-universal/ && mvn clean package
