@@ -22,7 +22,7 @@ jobs:
       - name: Run the Maven verify phase
         run: mvn --batch-mode --update-snapshots verify
       - name: Install all packages as local dependencies
-        run: mvn --batch-mode --install
+        run: mvn --batch-mode install
       - name: Build bungeeguard-universal
         run: cd bungeeguard-universal/ && mvn clean package
       - run: mkdir staging && cp bungeeguard-universal/target/BungeeGuard.jar staging
