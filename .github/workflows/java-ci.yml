@@ -15,8 +15,13 @@ jobs:
           distribution: 'adopt'
           cache: maven
       - name: Run the Maven verify phase
-        run: cd bungeeguard-universal && mvn --batch-mode --update-snapshots verify
-      - run: mkdir staging && cp bungeeguard-universal/target/bungeeguard-*.jar staging
+        run: mvn --batch-mode --update-snapshots verify
+      - name: Install as local dependencies
+        run: mvn --batch-mode --install
+      - name: Build bungeeguard-universal
+        run: cd bungeeguard-universal/ && mvn clean package
+      - name: Upload bungeeguard-universal
+      - run: mkdir staging && cp bungeeguard-universal/target/BungeeGuard.jar staging
       - uses: actions/upload-artifact@v3
         with:
           name: Package
